@@ -1,0 +1,121 @@
+{% extends 'Landing/base.html' %}
+{% block content %}
+<div class="container">
+	<div class="row mt-5">
+		<div class="col-md-3 col-sm-6 border-bottom">
+			<a href="{% url 'post-list' %}" class="btn btn-danger">Back To Feed</a>
+		</div>
+	</div>
+
+	<div class="row justify-content-center mt-5">
+		<div class="card shadow-sm col-md-5 col-sm-15 border-bottom px-5 pt-3">
+			
+			<img src="{{ profile.picture.url }}" class="rounded-circle" width="100" height="100" />
+			{% if profile.name %}
+			<h3 class="py-4">Name : @{{ profile.name }} 
+            {% endif %}
+				<span>
+					{% if request.user == user %}
+						<a href="{% url 'profile-edit' profile.pk %}" style="color: #3333"><i class="far fa-edit">
+							
+						</i>
+					</a>
+				</span>
+				{% else %}
+				<h3>Name: {{ user.username }}</h3>
+			</h3>
+			{% endif %}
+
+			{% if profile.location %}
+			<h6 class="">Location : {{ profile.location }}</h6>
+			{% endif %}
+
+			{% if profile.birth_date %}
+			<p class="">Birth : {{ profile.birth_date }}</p>
+			{% endif %}
+
+			{% if profile.bio %}
+			<p class="">Bio : {{ profile.bio }}</p>
+			{% endif %}
+
+			<div class="mb-3">
+				<h6>Followers : {{ number_of_followers }}</p>
+				{% if  is_following %}
+				<form method="POST" action="{% url 'remove-follower' profile.pk %}">
+					{%  csrf_token %}
+					<button class="btn btn-outline-danger" type="sumbit">UnFollow</button>
+				</form>
+				{% else %}
+				<form method="POST" action="{% url 'add-follower' profile.pk %}">
+					{%  csrf_token %}
+					<button class="btn btn-outline-success" type="sumbit">Follow</button>
+				</form>
+				{% endif %}
+		    </div>
+		</div>
+	</div>
+
+				<style>
+.blue-color {
+color:blue;
+}
+.green-color {
+color:green;
+}
+.teal-color {
+color:teal;
+}
+.yellow-color {
+color:yellow;
+}
+.red-color {
+color:red;
+}
+</style>
+	<div class="row justify-content-center md-5">
+		<div class="col-md-5 col-sm-15 border-bottom ">
+
+		    <p class=""><strong>Posts Has Posted :</strong></p>
+	{% for post  in posts %}
+	<div class="row justify-content-center md-5">
+		<div class="col-md-15 col-sm-19 border-bottom">
+			<p><a style="text-decoration: none" class="text-primary" href="{% url 'profile' post.author.profile.pk %}">@{{ post.author }}</a> {{ post.created_on }}</p>
+			<div class="position-relative">
+			    <p>{{ post.body }}</p>
+			    <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
+			</div>
+
+			<div class="d-flex flex-row">
+				<form method="POST" action="{% url 'like' post.pk %}">
+					{% csrf_token %}
+					<input type="hidden" name="next", value="{{ request.path }}">
+					<button style="background-color: transparent; border: none; box-shadow: none;" type="sumbit">
+						<i class="far fa-thumbs-up blue-color"> <span>{{ post.likes.all.count }}</span></i>
+					</button>
+				</form>
+			<div class="d-flex flex-row">
+				<form method="POST" action="{% url 'loves' post.pk %}">
+					{% csrf_token %}
+					<input type="hidden" name="next", value="{{ request.path }}">
+					<button style="background-color: transparent; border: none; box-shadow: none;" type="sumbit">
+						<i class="far fa-heart red-color"> <span>{{  post.loves.all.count }}</span></i>
+					</button>
+				</form>
+
+			<div class="d-flex flex-row">
+				<form method="POST" action="{% url 'dislike' post.pk %}">
+					{% csrf_token %}
+					<input type="hidden" name="next", value="{{ request.path }}">
+					<button style="background-color: transparent; border: none; box-shadow: none;" type="sumbit">
+						<i class="far fa-thumbs-down blue-color"> <span>{{  post.dislikes.all.count }}</span></i>
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+		</div>
+	</div>
+	{% endfor %}
+</div> 
+{% endblock content %}

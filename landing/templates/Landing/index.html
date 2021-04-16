@@ -1,0 +1,20 @@
+{% extends 'Landing/base.html' %}
+
+{% block content %}
+<div class="container">
+	<div class="row justify-content-center mt-5">
+		<div class="col-md-10 col-sm-12 text-center">
+			<script data-ad-client="ca-pub-3433886412715629" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<a style="background-image: url(media/uploads/profile_pictures/Ramadan.png);"></a>
+			<h1 class="display-2">Connect With Your Friends!</h1>
+			<p class="mt-3 lead">Follow people you like, who interest you, Join conversations with Your Friends!</p>
+			<h2 class="mt-3 lead">Ramdan Kareem</h2>
+			<h2 class="mt-3 lead">رمضان كريم !</h2>
+			<div class="d-flex justify-content-center mt-5">
+				<a href="{% url 'account_login' %}" class="btn  btn-light mr-2">Login</a>
+				<a href="{% url 'account_signup' %}" class="btn btn-dark">Register</a>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}
