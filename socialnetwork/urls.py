@@ -28,7 +28,7 @@ urlpatterns = [
     path('social/', include('social.urls'))
 
 
-    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
+
 
 ]
 
