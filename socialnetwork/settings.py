@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '5&8=#n81c#1p5*10munpusdse))br(j*&5@4zgm*1$zet4u4tj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', 'safechat.ddns.net', '5a9ab94b929c.ngrok.io']
+ALLOWED_HOSTS = ['localhost', 'safechat.ddns.net', '5a9ab94b929c.ngrok.io', '127.0.0.1']
 
 
 # Application definition
@@ -61,6 +61,7 @@ SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
