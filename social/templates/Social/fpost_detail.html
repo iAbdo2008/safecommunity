@@ -1,0 +1,94 @@
+{% extends 'Landing/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+	<div class="row justify-content-center mt-3">
+		<div class="col-md-12 col-sm-6">
+			<a  href="{% url 'fpost-list' %}" class="btn  btn-dark mr-2">Back to Feed</a>
+		</div>
+	</div>
+
+	<div class="row justify-content-center mt-3">
+		<div class="col-md-5 col-sm-12 border-bottom">
+			<p>
+				<strong>{{ post.author }}</strong> {{ post.created_on }}
+				{% if request.user == post.author %}
+					<a href="{% url 'post-edit'  post.pk %}"  style="color:  #333;"><button class="btn btn-success mr-2">Edit</button></i></a>
+					<a href="{% url 'post-delete'  post.pk %}"  style="color:  #333;"><button class="btn btn-danger mr-2">Delete</button></a>
+				{% endif %}
+		    </p>
+			<p>{{ post.body }}</p>
+						<style>
+.blue-color {
+color:blue;
+}
+.green-color {
+color:green;
+}
+.teal-color {
+color:teal;
+}
+.yellow-color {
+color:yellow;
+}
+.red-color {
+color:red;
+}
+</style>
+			<div class="d-flex flex-row">
+				<form method="POST" action="{% url 'like' post.pk %}">
+					{% csrf_token %}
+					<input type="hidden" name="next", value="{{ request.path }}">
+					<button style="background-color: transparent; border: none; box-shadow: none;" type="sumbit">
+						<i class="far fa-thumbs-up blue-color"> <span>{{ post.likes.all.count }}</span></i>
+					</button>
+				</form>
+							<div class="d-flex flex-row">
+				<form method="POST" action="{% url 'dislike' post.pk %}">
+					{% csrf_token %}
+					<input type="hidden" name="next", value="{{ request.path }}">
+					<button style="background-color: transparent; border: none; box-shadow: none;" type="sumbit">
+						<i class="far fa-thumbs-down blue-color"> <span>{{  post.dislikes.all.count }}</span></i>
+					</button>
+				</form>
+							<div class="d-flex flex-row">
+				<form method="POST" action="{% url 'loves' post.pk %}">
+					{% csrf_token %}
+					<input type="hidden" name="next", value="{{ request.path }}">
+					<button style="background-color: transparent; border: none; box-shadow: none;" type="sumbit">
+						<i class="far fa-heart red-color"> <span>{{  post.loves.all.count }}</span></i>
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+		</div>
+	</div>
+
+	<div class="row justify-content-center mt-3 mb-5">
+		<div class="col-md-5 col-sm-12 border-bottom">
+			<form method="POST" enctype="multipart/form-data">
+				{%  csrf_token %}
+				{{ form | crispy}}
+				<div class="d-grid gap-2">
+					<button class="btn  btn-dark mr-2">Comment</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	{% for comment in comments %}
+	<div class="row justify-content-center mt-3 mb-5">
+		<div class="col-md-5 col-sm-12 border-bottom">
+			<p> 
+				<strong>{{ comment.author }}</strong> {{ comment.created_on }}
+				{% if request.user == comment.author %}
+					<a href="{% url 'comment-delete' post.pk comment.pk %}"><button class="btn btn-danger mr-2">Delete</button></a>
+				{% endif %}
+			</p>
+		    <p>{{ comment.comment }}</p>
+
+		</div>
+	</div>
+	{% endfor %}
+</div>
+{% endblock content %}
