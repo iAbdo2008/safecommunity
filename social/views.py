@@ -246,3 +246,96 @@ class Love(LoginRequiredMixin, View):
 
 		next  = request.POST.get('next', '/')
 		return HttpResponseRedirect(next)
+	
+	
+	
+	
+	
+class FPostListView(LoginRequiredMixin, View):
+	def get(self, request, *args, **kwargs):
+		posts = Post.objects.all().order_by('-created_on')
+		form = PostForm()
+
+		context = {
+			'post_list': posts,
+			'form': form,
+		}
+
+		return render(request, 'Social/fpost_list.html', context)
+	def post(self, request, *args, **kwargs):
+		posts = Post.objects.all().order_by('-created_on')
+		form = PostForm(request.POST)
+
+		if form.is_valid():
+			new_post = form.save(commit=False)
+			new_post.author = request.user
+			new_post.save()
+
+		context = {
+			'fpost_list': posts,
+			'form': form,
+		 }
+
+		return render(request, 'Social/fpost_list.html', context)
+
+class FPostDetailView(LoginRequiredMixin, View):
+	def get(self, request, pk, *args, **kwargs):
+		post = Post.objects.get(pk=pk)
+		form  = CommentForm()
+		comments =  Comment.objects.filter(post=post).order_by('-created_on')
+		context = {
+
+			'post':  post,
+			'form':form,
+			'comments': comments,
+		}
+
+		return render(request, 'Social/fpost_detail.html', context)
+	def post(self, request, pk, *args, **kwargs):
+		post = Post.objects.get(pk=pk)
+		form  = CommentForm(request.POST)
+		if form.is_valid():
+			new_comment = form.save(commit=False)
+			new_comment.author = request.user
+			new_comment.post = post
+			new_comment.save()
+
+		comments =  Comment.objects.filter(post=post).order_by('-created_on')
+		context = {
+
+			'post':  post,
+			'form':form,
+			'comments': comments,
+		}
+
+		return render(request, 'Social/fpost_detail.html', context)
+
+class FPostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+	model = Post
+	fields  = ['body']
+	template_name = 'Social/fpost_edit.html'
+
+	def get_success_url(self):
+		pk = self.kwargs['pk']
+		return reverse_lazy('fpost-detail', kwargs={'pk': pk})
+
+	def test_func(self):
+		post = self.get_object()
+		return self.request.user == post.author
+
+class FPostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+	model  = Post
+	template_name =  'Social/fpost_delete.html'
+	success_url = reverse_lazy('fpost-list')
+	def test_func(self):
+		post = self.get_object()
+		return self.request.user == post.author
+
+class FCommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+	model = Comment
+	template_name = 'Social/fcomment_delete.html'
+	success_url = reverse_lazy('fpost-list')
+	comment = model
+	def test_func(self):
+		post = self.get_object()
+		return self.request.user == post.author
