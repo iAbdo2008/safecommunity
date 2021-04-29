@@ -251,19 +251,21 @@ class Love(LoginRequiredMixin, View):
 	
 	
 	
-class FPostListView(LoginRequiredMixin, View):
-	def get(self, request, *args, **kwargs):
-		logged_in_user = request.user
-                posts = Post.objects.filter(author__profile__followers__in=[logged_in_user.id]).order_by('-created_on')
-		form = PostForm()
+class PostListView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        logged_in_user = request.user
+        posts = Post.objects.filter(
+            author__profile__followers__in=[logged_in_user.id]
+        ).order_by('-created_on')
+	form = PostForm()
 
-		context = {
-			'post_list': posts,
-			'form': form,
-		}
+	context = {
+		'post_list': posts,
+		'form': form,
+	}
 
-		return render(request, 'Social/fpost_list.html', context)
-	def post(self, request, *args, **kwargs):
+	return render(request, 'Social/fpost_list.html', context)
+   def post(self, request, *args, **kwargs):
 		posts = Post.objects.all().order_by('-created_on')
 		form = PostForm(request.POST)
 
