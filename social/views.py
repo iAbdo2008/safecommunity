@@ -258,7 +258,7 @@ class FPostListView(LoginRequiredMixin, View):
 		form = PostForm()
 
 		context = {
-			'post_list': posts,
+			'fpost_list': posts,
 			'form': form,
 		}
 
@@ -273,7 +273,7 @@ class FPostListView(LoginRequiredMixin, View):
 			new_post.save()
 
 		context = {
-			'post_list': posts,
+			'fpost_list': posts,
 			'form': form,
 		 }
 
