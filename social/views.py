@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
-from django.contrib.auth.mixins import UserPassesTestMixin,LoginRequiredMixin
-from django.views import View 
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.views import View
 from .models import Post, Comment, UserProfile
 from .forms import PostForm, CommentForm
 from django.views.generic.edit import UpdateView, DeleteView
@@ -253,6 +253,7 @@ class Love(LoginRequiredMixin, View):
 	
 class FPostListView(LoginRequiredMixin, View):
 	def get(self, request, *args, **kwargs):
+		logged_in_user = request.user
 		posts = Post.objects.filter(author__profile__followers__in=[logged_in_user.id]).order_by('-created_on')
 		form = PostForm()
 
