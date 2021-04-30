@@ -7,7 +7,7 @@
     {% else %}
     href="{% url 'index' %}"
     {% endif %}
-    href="#"><i class="fas fa-comment"></i>SafeCommunity</a>
+    href="#"><i class="fas fa-comment"></i>  SafeCommunity</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -28,6 +28,7 @@
           <li><a class="dropdown-item"  href="{% url 'profile' user.profile.pk %}">Profile</a></li>
           <li><a class="dropdown-item"  href="{% url 'account_logout' %}">Logout</a></li>
           <li><a class="dropdown-item"  href="{% url 'post-list' %}">Posts</a></li>
+          <li><a class="dropdown-item"  href="{% url 'fpost-list' %}">Followed Posts</a></li>
         </ul>
     </div>
     {% endif %}
