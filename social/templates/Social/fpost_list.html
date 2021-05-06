@@ -53,6 +53,23 @@
 	{% for post  in fpost_list %}
 	<div class="row justify-content-center mt-3">
 		<div class="col-md-12 col-sm-12 border-bottom position-relative">
+			
+			<div class="card" style="width: 18rem;">
+				f
+				
+  			        <div class="card-body">
+					<div class="position-relative">
+						d
+					        <p<a style="text-decoration: none" class="card-text" href="{% url 'profile' post.author.profile.pk %}">@{{ post.author }}</a> {{ post.created_on }} class="card-title"></p>
+	                                        <div class="position-relative">
+			                        <p>{{ post.body }}</p>
+			                        <a href="{% url 'fpost-detail' post.pk %}" class="stretched-link"></a>
+	                                  </div>
+                                 </div>
+		</div>
+			</div>
+</div>
+
 			<p><a style="text-decoration: none" class="text-primary" href="{% url 'profile' post.author.profile.pk %}">@{{ post.author }}</a> {{ post.created_on }}</p>
 			<div class="position-relative">
 			    <p>{{ post.body }}</p>
@@ -107,4 +124,5 @@ color:red;
 	</div>
 	{% endfor %}
 </div>
+		
 {% endblock content %}
