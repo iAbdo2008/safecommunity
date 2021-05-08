@@ -17,7 +17,7 @@ class Comment(models.Model):
 	author = author = models.ForeignKey(User, on_delete=models.CASCADE)
 	post = models.ForeignKey('Post', on_delete=models.CASCADE)
 	likes = models.ManyToManyField(User, blank=True, related_name='comment_likes')
-	dislikes = modles.ManyToManyField(User, blank=True, related_name='comment_dislikes')
+	dislikes = models.ManyToManyField(User, blank=True, related_name='comment_dislikes')
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User, primary_key=True, verbose_name='user', related_name='profile', on_delete=models.CASCADE)
