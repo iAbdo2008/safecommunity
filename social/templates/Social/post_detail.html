@@ -81,13 +81,15 @@ color:red;
 		<div class="col-md-5 col-sm-12 border-bottom">
 			<div class="form-floating mb-3">
 				<div class="form-floating mb-3">
-			<p> 
-				<strong>{{ comment.author }}</strong> {{ comment.created_on }}
-				{% if request.user == comment.author %}
-					<a href="{% url 'comment-delete' post.pk comment.pk %}"><button class="btn btn-danger mr-2">Delete</button></a>
-				{% endif %}
-			</p>
-		    <p>{{ comment.comment }}</p>
+					n
+			                <p>
+						g
+				                <strong>{{ comment.author }}</strong> {{ comment.created_on }}
+				                {% if request.user == comment.author %}
+					        <a href="{% url 'comment-delete' post.pk comment.pk %}"><button class="btn btn-danger mr-2">Delete</button></a>
+				                {% endif %}
+			                </p>
+		                        <p>{{ comment.comment }}</p>
 				</div>
 			</div>
 		</div>
