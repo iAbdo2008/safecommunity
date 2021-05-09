@@ -65,7 +65,13 @@
 						border-radius: 10px;
 						margin-bottom: 10px;
 					}
-				</style>  
+					
+				</style>
+			  <p>{{ post.body }}</p>
+
+			    <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
+
+			</div>
 			  {% endif %}
 
 			<style>
