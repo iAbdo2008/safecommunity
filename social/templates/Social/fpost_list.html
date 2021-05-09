@@ -56,7 +56,7 @@
 			<div class="card" style="width: 18rem;">
   			        <div class="card-body">
 					        <p><a style="text-decoration: none" class="text-primary" href="{% url 'profile' post.author.profile.pk %}">@{{ post.author }}</a> {{ post.created_on }}</p>
-    <div class="position-relative">
+                                                <div class="position-relative">
 			  {% if post.image %}
 			  	<img src="{{ post.image.url }}" class="post-image" /> 
 				<style>
@@ -67,7 +67,7 @@
 						margin-bottom: 10px;
 					}
 				</style>  
-
+			  {% endif %}
 			<style>
 .blue-color {
 color:blue;
