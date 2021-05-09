@@ -56,13 +56,17 @@
 			<div class="card" style="width: 18rem;">
   			        <div class="card-body">
 					        <p><a style="text-decoration: none" class="text-primary" href="{% url 'profile' post.author.profile.pk %}">@{{ post.author }}</a> {{ post.created_on }}</p>
-          <div class="position-relative">
-
-			    <p>{{ post.body }}</p>
-
-			    <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
-
-			</div>
+    <div class="position-relative">
+			  {% if post.image %}
+			  	<img src="{{ post.image.url }}" class="post-image" /> 
+				<style>
+					.post-image{
+						max-width: 100%;
+						height: auto;
+						border-radius: 10px;
+						margin-bottom: 10px;
+					}
+				</style>  
 
 			<style>
 .blue-color {
