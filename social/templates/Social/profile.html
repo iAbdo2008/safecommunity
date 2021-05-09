@@ -80,23 +80,24 @@ color:red;
 	<div class="row justify-content-center md-5">
 		<div class="col-md-15 col-sm-19 border-bottom">
 			<p><a style="text-decoration: none" class="text-primary" href="{% url 'profile' post.author.profile.pk %}">@{{ post.author }}</a> {{ post.created_on }}</p>
-			<div class="position-relative">
-			  {% if post.image %}
-			  	<img src="{{ post.image.url }}" class="post-image" /> 
-				<style>
-					.post-image{
-						max-width: 100%;
-						height: auto;
-						border-radius: 10px;
-						margin-bottom: 10px;
-					}
-				</style>  
-				 <p>{{ post.body }}</p>
+			 <div class="position-relative">
+								  {% if post.image %}
+									<img src="{{ post.image.url }}" class="post-image" /> 
+									<style>
+										.post-image{
+											max-width: 100%;
+											height: auto;
+											border-radius: 10px;
+											margin-bottom: 10px;
+										}
 
-			    <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
+									</style>
+								  {% endif %}
+								     <p>{{ post.body }}</p>
 
-			</div>
-			  {% endif %}
+									  <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
+
+								</div>
 
 			<div class="d-flex flex-row">
 				<form method="POST" action="{% url 'like' post.pk %}">
