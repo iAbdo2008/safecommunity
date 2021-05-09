@@ -16,23 +16,7 @@
 					<a href="{% url 'post-edit'  post.pk %}"  style="color:  #333;"><button class="btn btn-success mr-2">Edit</button></i></a>
 					<a href="{% url 'post-delete'  post.pk %}"  style="color:  #333;"><button class="btn btn-danger mr-2">Delete</button></a>
 				{% endif %}
-		    			  {% if post.image %}
-									<img src="{{ post.image.url }}" class="post-image" /> 
-									<style>
-										.post-image{
-											max-width: 100%;
-											height: auto;
-											border-radius: 10px;
-											margin-bottom: 10px;
-										}
-
-									</style>
-								  {% endif %}
-								     <p>{{ post.body }}</p>
-
-									  <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
-
-								</div>
+		    			
 	    </p>
 						<style>
 .blue-color {
