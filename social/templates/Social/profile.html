@@ -91,6 +91,11 @@ color:red;
 						margin-bottom: 10px;
 					}
 				</style>  
+				 <p>{{ post.body }}</p>
+
+			    <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
+
+			</div>
 			  {% endif %}
 
 			<div class="d-flex flex-row">
