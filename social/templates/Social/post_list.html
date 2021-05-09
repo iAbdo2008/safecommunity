@@ -51,7 +51,7 @@
 		</div>
 	{% for post  in post_list %}
 	<div class="row justify-content-center mt-5">
-		<div class="col-md-15 col-sm-15 border-bottom position-relative">
+		<div class="col-md-19 col-sm-19 border-bottom position-relative">
 			<div class="card" style="width: 18rem;">
   			        <div class="card-body">
 					        <p><a style="text-decoration: none" class="text-primary" href="{% url 'profile' post.author.profile.pk %}">@{{ post.author }}</a> {{ post.created_on }}</p>
