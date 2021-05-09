@@ -31,7 +31,7 @@ class PostListView(LoginRequiredMixin, View):
 		context = {
 			'post_list': posts,
 			'form': form,
-		 }
+		 } 
 
 		return render(request, 'Social/post_list.html', context)
 
