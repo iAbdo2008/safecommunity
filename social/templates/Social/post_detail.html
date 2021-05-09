@@ -17,6 +17,18 @@
 					<a href="{% url 'post-delete'  post.pk %}"  style="color:  #333;"><button class="btn btn-danger mr-2">Delete</button></a>
 				{% endif %}
 		<p>{{ post.body }}</p>
+		          {% if post.image %}
+									<img src="{{ post.image.url }}" class="post-image" /> 
+									<style>
+										.post-image{
+											max-width: 100%;
+											height: auto;
+											border-radius: 10px;
+											margin-bottom: 10px;
+										}
+
+									</style>
+				  {% endif %}
 		    			
 	    </p>
 						<style>
