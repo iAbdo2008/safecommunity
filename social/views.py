@@ -69,7 +69,7 @@ class PostDetailView(LoginRequiredMixin, View):
 
 class PostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	model = Post
-	fields  = ['body']
+	fields  = ['body','image']
 	template_name = 'Social/post_edit.html'
 
 	def get_success_url(self):
@@ -313,7 +313,7 @@ class FPostDetailView(LoginRequiredMixin, View):
 
 class FPostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	model = Post
-	fields  = ['body']
+	fields  = ['body','image']
 	template_name = 'Social/fpost_edit.html'
 
 	def get_success_url(self):
