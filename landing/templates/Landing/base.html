@@ -14,20 +14,11 @@
     <script data-ad-client="ca-pub-3433886412715629" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script
     <meta name="exoclick-site-verification" content="a5dcae035799c805d472fe6c0f2054f7">
   </head>
-  <body>
+  <body id="bg" style="background-image: url('{% static "media/uploads/meooow.jpg"%}');">
     {% include 'Landing/navbar.html' %}
     {% block content %}
     {% endblock content %}
     {% load static %}
-    <td class="tdStyle"> 
-    <style>
-.tdStyle
-{
-background-image:url('{{ STATIC_URL }}media/uploads/meooow.JPG');
-background-repeat:no-repeat;
-background-size:100%;
-}
-</style>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 
