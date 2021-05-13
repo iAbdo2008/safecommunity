@@ -75,7 +75,19 @@
 									  <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
 
 								</div>
-								  
+	  <div class="row justify-content-center mt-6>
+				  <div class="col-md-19 col-sm-19 border-bottom>
+		  						<div class="card" style="width: 18rem;">
+  <img src="{{ profile.picture.url }}" class="card-img-top">
+  <div class="card-body">
+    <h5 class="card-title">{{ profile.name }}</h5>
+  </div>
+  <ul class="list-group list-group-flush">
+	<li class="list-group-item"><a href="{% url 'post-list' %}>Featured</a></li>
+	<li class="list-group-item"><a href="{% url 'profile' user.profile.pk %}>Profile</a></li>
+	<li class="list-group-item"><a href="{% url 'fpost-list' %}>Posts</a></li>
+  </ul>
+</div>
     	
   
 			<style>
@@ -125,15 +137,5 @@ color:red;
 		</div>
 	</div>
 	{% endfor %}
-<div class="card" style="width: 18rem;">
-  <img src="{{ profile.picture.url }}" class="card-img-top">
-  <div class="card-body">
-    <h5 class="card-title">{{ profile.name }}</h5>
-  </div>
-  <ul class="list-group list-group-flush">
-	<li class="list-group-item"><a href="{% url 'post-list' %}>Featured</a></li>
-	<li class="list-group-item"><a href="{% url 'profile' user.profile.pk %}>Profile</a></li>
-	<li class="list-group-item"><a href="{% url 'fpost-list' %}>Posts</a></li>
-  </ul>
-</div>
+
 {% endblock content %}
