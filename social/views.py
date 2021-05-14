@@ -343,7 +343,7 @@ class FCommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class GroupListView(LoginRequiredMixin, View):
 	def get(self, request, *args, **kwargs):
-		groups = Groups.objects.all().order_by('-created_on')
+		groups = Groupat.objects.all().order_by('-created_on')
 		form = PostForm()
 
 		context = {
@@ -353,7 +353,7 @@ class GroupListView(LoginRequiredMixin, View):
 
 		return render(request, 'Social/group_list.html', context)
 	def group(self, request, *args, **kwargs):
-		groups = Groups.objects.all().order_by('-created_on')
+		groups = Groupat.objects.all().order_by('-created_on')
 		form = PostForm(request.POST, request.FILES) 
 
 		if form.is_valid():
