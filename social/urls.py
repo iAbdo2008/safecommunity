@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PostListView, PostDetailView, PostEditView, PostDeleteView, CommentDeleteView, ProfileView, ProfileEditView, AddFollower, RemoveFollower, AddLike, Dislike, UserSearch, Love, FPostListView, FPostDetailView, FPostEditView, FPostDeleteView, FCommentDeleteView
+from .views import PostListView, PostDetailView, PostEditView, PostDeleteView, CommentDeleteView, ProfileView, ProfileEditView, AddFollower, RemoveFollower, AddLike, Dislike, UserSearch, Love, FPostListView, FPostDetailView, FPostEditView, FPostDeleteView, FCommentDeleteView, GroupListView, GPostListView, GPostDetailView, GPostEditView, GPostDeleteView, GroupDeleteView, GroupEditView, GroupDetailView
 
 urlpatterns = [
 	path('post', PostListView.as_view(), name='post-list'),
@@ -20,4 +20,11 @@ urlpatterns = [
 	path('fpost/edit/<int:pk>', FPostEditView.as_view(), name='fpost-edit'),
 	path('fpost/delete/<int:pk>', FPostDeleteView.as_view(), name='fpost-delete'),
 	path('fpost/<int:post_pk>/comment/delete/<int:pk>', CommentDeleteView.as_view(), name='fcomment-delete'),
+	path('group', PostListView.as_view(), name='group-list'),
+	path('group/<int:pk>', GroupDetailView.as_view(), name='group-detail'),
+	path('group/edit/<int:pk>', GroupEditView.as_view(), name='group-edit'),
+	path('group/delete/<int:pk>', GroupDeleteView.as_view(), name='group-delete'),
+	path('group/gposts', GPostListView.as_view(), name='gpost-list'),
+	path('group/gposts/<int:pk>', GPostDetailView.as_view(), name='gpost-detail'),
+	path('group/gposts/edit/<int:pk>', GPostDetailView.as_view(), name='gpost-detail'),
 ]
