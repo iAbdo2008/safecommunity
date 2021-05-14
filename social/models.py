@@ -34,7 +34,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, created, **kwargs):
 	instance.profile.save()
 
-Class Groups(models.Model):
+class Groups(models.Model):
     myuser = models.ForeignKey(User, related_name='groups')
 	name = models.charField(max_length=30, blank=True, null=True)
 	description = models.TextField(max_length=600, 
