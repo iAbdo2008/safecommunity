@@ -1,0 +1,110 @@
+{% extends 'Landing/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+
+	<div class="row justify-content-center mt-3">
+		<div class="col-md-5 col-sm-12 border-bottom">
+			<script data-ad-client="ca-pub-3433886412715629" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+			<h5>عيد فطر مبارك !</h5>
+                        <h5> انقذوا حي الشيخ جراح! </h5>
+			<h5>Create A Group or See One</h5>
+		</div>
+	</div>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		  <a class="navbar-brand" href="#">See Posts, Videos</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+		    <ul class="navbar-nav">
+		      <li class="nav-item active">
+			      <a class="nav-link" href="{% url 'post-list' %}">Featured <span class="sr-only">(current)</span></a>
+		      </li>
+		      <li class="nav-item">
+			      <a class="nav-link" href="{% url 'fpost-list' %}">Posts </a>
+		      </li>
+		      <li class="nav-item">
+                  <a class="nav-link" href="{% url 'group-list' %}"><strong>Groups </strong></a>
+		      </li>
+			    <li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Dropdown link
+			</a>
+			<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+			  <a class="dropdown-item" href="#">Action</a>
+			  <a class="dropdown-item" href="#">Another action</a>
+			  <a class="dropdown-item" href="#">Something else here</a>
+			</div>
+		      </li>
+		    </ul>
+		  </div>
+		</nav>
+
+	<div class="row justify-content-center mt-3 mb-5">
+		<div class="col-md-5 col-sm-12 border-bottom">
+            <button class="btn  btn-dark mr-2"><a href="{% url 'group-edit' %}</a>Create Group</button>
+			</form>
+		</div>
+	{% for group  in group_list %}
+	<div class="row justify-content-center mt-5">
+		<div class="col-md-19 col-sm-19 border-bottom position-relative">
+			<div class="card" style="width: 18rem;">
+  			        <div class="card-body">
+								     <h4>{{ group.name }}</h4>
+                                     <p>{{ group.description }}
+									  <a href="{% url 'group-detail' group.pk %}" class="stretched-link"></a>
+
+								</div>
+
+    	
+  
+			<style>
+.blue-color {
+color:blue;
+}
+.green-color {
+color:green;
+}
+.teal-color {
+color:teal;
+}
+.yellow-color {
+color:yellow;
+}
+.red-color {
+color:red;
+}
+</style>
+			<div class="d-flex flex-row">
+				<form method="POST" action="{% url 'like' post.pk %}">
+					{% csrf_token %}
+					<input type="hidden" name="next", value="{{ request.path }}">
+					<button style="background-color: transparent; border: none; box-shadow: none;" type="sumbit">
+						<i class="far fa-thumbs-up blue-color"> <span>{{ post.likes.all.count }}</span></i>
+					</button>
+				</form>
+							<div class="d-flex flex-row">
+				<form method="POST" action="{% url 'dislike' post.pk %}">
+					{% csrf_token %}
+					<input type="hidden" name="next", value="{{ request.path }}">
+					<button style="background-color: transparent; border: none; box-shadow: none;" type="sumbit">
+						<i class="far fa-thumbs-down blue-color"> <span>{{  post.dislikes.all.count }}</span></i>
+					</button>
+				</form>
+						<div class="d-flex flex-row">
+				<form method="POST" action="{% url 'loves' post.pk %}">
+					{% csrf_token %}
+					<input type="hidden" name="next", value="{{ request.path }}">
+					<button style="background-color: transparent; border: none; box-shadow: none;" type="sumbit">
+						<i class="far fa-heart red-color"> <span>{{  post.loves.all.count }}</span></i>
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+		</div>
+	</div>
+	{% endfor %}
+
+{% endblock content %}
