@@ -27,8 +27,8 @@
         <ul class="dropdown-menu">
           <li><a class="dropdown-item"  href="{% url 'profile' user.profile.pk %}">Profile</a></li>
           <li><a class="dropdown-item"  href="{% url 'account_logout' %}">Logout</a></li>
-          <li><a class="dropdown-item"  href="{% url 'post-list' %}">Posts</a></li>
-          <li><a class="dropdown-item"  href="{% url 'fpost-list' %}">Followed Posts</a></li>
+          <li><a class="dropdown-item"  href="{% url 'post-list' %}"># Featured</a></li>
+          <li><a class="dropdown-item"  href="{% url 'fpost-list' %}">😀 Posts</a></li>
         </ul>
     </div>
     {% endif %}
