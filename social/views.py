@@ -395,6 +395,36 @@ class GPostListView(LoginRequiredMixin, View):
 		 } 
 
 		return render(request, 'Social/gpost_list.html', context)
+class GroupDetailView(LoginRequiredMixin, View):
+	def get(self, request, pk, *args, **kwargs):
+		post = Post.objects.get(pk=pk)
+		form  = CommentForm()
+		comments =  Comment.objects.filter(post=post).order_by('-created_on')
+		context = {
+
+			'post':  post,
+			'form':form,
+			'comments': comments,
+		}
+
+		return render(request, 'Social/gpost_detail.html', context)
+	def post(self, request, pk, *args, **kwargs):
+		post = Post.objects.get(pk=pk)
+		form  = CommentForm(request.POST)
+		if form.is_valid():
+			new_comment = form.save(commit=False)
+			new_comment.author = request.user
+			new_comment.post = post
+			new_comment.save()
+
+		comments =  Comment.objects.filter(post=post).order_by('-created_on')
+		context = {
+
+			'post':  post,
+			'form':form,
+			'comments': comments,
+		}
+
 class GPostDetailView(LoginRequiredMixin, View):
 	def get(self, request, pk, *args, **kwargs):
 		post = Post.objects.get(pk=pk)
@@ -451,5 +481,18 @@ class GroupDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 	template_name =  'Social/group_delete.html'
 	success_url = reverse_lazy('group-list')
 	def test_func(self):
-		post = self.get_object()
+		group = self.get_object()
 		return self.request.user == group.author
+	
+class GroupEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+	model = Groups
+	fields = ['name', 'description']
+	template_name = 'Social/group_edit.html'
+
+	def get_success_url(self):
+		pk = self.kwargs['pk']
+		return reverse_lazy('group-detail', kwargs={'pk': pk})
+
+	def test_func(self):
+		group = self.get_object()
+		return self.request.user == group.user
