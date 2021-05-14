@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.views import View
-from .models import Post, Comment, UserProfile
+from .models import Post, Comment, UserProfile, Groups
 from .forms import PostForm, CommentForm
 from django.views.generic.edit import UpdateView, DeleteView
 
@@ -343,15 +343,43 @@ class FCommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class GroupListView(LoginRequiredMixin, View):
 	def get(self, request, *args, **kwargs):
-		posts = Post.objects.all().order_by('-created_on')
+		groups = Groups.objects.all().order_by('-created_on')
 		form = PostForm()
 
 		context = {
-			'post_list': posts,
+			'group_list': groups,
 			'form': form,
 		}
 
-		return render(request, 'Social/post_list.html', context)
+		return render(request, 'Social/group_list.html', context)
+	def group(self, request, *args, **kwargs):
+		groups = Groups.objects.all().order_by('-created_on')
+		form = PostForm(request.POST, request.FILES) 
+
+		if form.is_valid():
+			new_group = form.save(commit=False)
+			new_group.author = request.user
+			new_group.save()
+
+		context = {
+			'group_list': groups,
+			'form': form,
+		 } 
+
+		return render(request, 'Social/group_list.html', context)
+
+class GPostListView(LoginRequiredMixin, View):
+	def get(self, request, *args, **kwargs):
+		logged_in_user = request.user
+		posts = Post.objects.filter(myuser=[logged_in_user.id]).order_by('-created_on')
+		form = PostForm()
+
+		context = {
+			'gpost_list': posts,
+			'form': form,
+		}
+
+		return render(request, 'Social/gpost_list.html', context)
 	def post(self, request, *args, **kwargs):
 		posts = Post.objects.all().order_by('-created_on')
 		form = form = PostForm(request.POST, request.FILES) 
@@ -362,13 +390,12 @@ class GroupListView(LoginRequiredMixin, View):
 			new_post.save()
 
 		context = {
-			'post_list': posts,
+			'gpost_list': posts,
 			'form': form,
 		 } 
 
-		return render(request, 'Social/post_list.html', context)
-
-class PostDetailView(LoginRequiredMixin, View):
+		return render(request, 'Social/gpost_list.html', context)
+class GPostDetailView(LoginRequiredMixin, View):
 	def get(self, request, pk, *args, **kwargs):
 		post = Post.objects.get(pk=pk)
 		form  = CommentForm()
@@ -380,7 +407,7 @@ class PostDetailView(LoginRequiredMixin, View):
 			'comments': comments,
 		}
 
-		return render(request, 'Social/post_detail.html', context)
+		return render(request, 'Social/gpost_detail.html', context)
 	def post(self, request, pk, *args, **kwargs):
 		post = Post.objects.get(pk=pk)
 		form  = CommentForm(request.POST)
@@ -398,25 +425,31 @@ class PostDetailView(LoginRequiredMixin, View):
 			'comments': comments,
 		}
 
-		return render(request, 'Social/post_detail.html', context)
-
-class PostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+		return render(request, 'Social/gpost_detail.html', context)
+class GPostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	model = Post
 	fields  = ['body','image']
-	template_name = 'Social/post_edit.html'
+	template_name = 'Social/gpost_edit.html'
 
 	def get_success_url(self):
 		pk = self.kwargs['pk']
-		return reverse_lazy('post-detail', kwargs={'pk': pk})
+		return reverse_lazy('gpost-detail', kwargs={'pk': pk})
 
 	def test_func(self):
 		post = self.get_object()
 		return self.request.user == post.author
 
-class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class GPostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 	model  = Post
-	template_name =  'Social/post_delete.html'
-	success_url = reverse_lazy('post-list')
+	template_name =  'Social/gpost_delete.html'
+	success_url = reverse_lazy('gpost-list')
 	def test_func(self):
 		post = self.get_object()
 		return self.request.user == post.author
+class GroupDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+	model  = Groups
+	template_name =  'Social/group_delete.html'
+	success_url = reverse_lazy('group-list')
+	def test_func(self):
+		post = self.get_object()
+		return self.request.user == group.author
