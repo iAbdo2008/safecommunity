@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.views import View
-from .models import Post, Comment, UserProfile, Groups
+from .models import Post, Comment, UserProfile, Groupat
 from .forms import PostForm, CommentForm
 from django.views.generic.edit import UpdateView, DeleteView
 
