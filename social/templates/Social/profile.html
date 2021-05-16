@@ -76,12 +76,32 @@ color:red;
 		<div class="col-md-5 col-sm-15 border-bottom ">
 
 		    <p class=""><strong>Posts Has Posted :</strong></p>
-	{% for post  in posts %}
-	<div class="row justify-content-center md-5">
-		<div class="col-md-15 col-sm-19 border-bottom">
-			<p><a style="text-decoration: none" class="text-primary" href="{% url 'profile' post.author.profile.pk %}">@{{ post.author }}</a> {{ post.created_on }}</p>
-			 <div class="position-relative">
+	{% for post  in post_list %}
+	<div class="row justify-content-center mt-5">
+		<div class="col-md-19 col-sm-19 border-bottom position-relative">
+			<div class="card" style="width: 18rem;">
+  			        <div class="card-body">
+						    <div>
+								<style>
+									.post-text{
+										padding-top: 0.5rem;
+									}
+									.post-img{
+										float: left;
+										margin-right: 1rem;
+									}
+								</style>
+								<a href="{% url 'profile' post.author.profile.pk %}">
+								<img class="round-circle post-img" height="30" width="30" src="{{ post.author.profile.picture.url }}" />
+								</a>
+								<p class="post-text">
+									<a style="text-decoration: none" class="text-primary" href="{% url 'profile' post.author.profile.pk %}">@{{ post.author }}</a> {{ post.created_on }}
+								</p>
+						    </div>
+					        
+							 <div class="position-relative">
 								  {% if post.image %}
+								 	{% load static %}
 									<img src="{{ post.image.url }}" class="post-image" /> 
 									<style>
 										.post-image{
