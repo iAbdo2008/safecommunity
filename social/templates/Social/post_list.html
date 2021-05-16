@@ -66,7 +66,7 @@
 									}
 								</style>
 								<a href="{% url 'profile' post.author.profile.pk %}">
-								<img class="round-circle post-img" height="30" width="30" src="{{ post.author.profile.picture.url }}" />
+								<img class="rounded-circle post-img" height="30" width="30" src="{{ post.author.profile.picture.url }}" />
 								</a>
 								<p class="post-text">
 									<a style="text-decoration: none" class="text-primary" href="{% url 'profile' post.author.profile.pk %}">@{{ post.author }}</a> {{ post.created_on }}
