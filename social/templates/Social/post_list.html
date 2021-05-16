@@ -74,6 +74,11 @@
 						    </div>
 					        
 							 <div class="position-relative">
+								 <p>{{ post.body }}</p>
+
+									  <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
+
+								</div>
 								  {% if post.image %}
 								 	{% load static %}
 									<img src="{{ post.image.url }}" class="post-image" /> 
@@ -87,11 +92,7 @@
 
 									</style>
 								  {% endif %}
-								     <p>{{ post.body }}</p>
-
-									  <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
-
-								</div>
+								    
 
     	
   
