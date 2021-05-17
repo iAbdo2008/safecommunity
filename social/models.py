@@ -33,12 +33,12 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, created, **kwargs):
 	instance.profile.save()
-class Notification(models.Model):
+#class Notification(models.Model):
 	#1 = Like, 2 = Comment, 3 = Follow\
-	notification_type = models.IntegerField()
-	to_user = model.ForeignKey(User, related_name='notification_to', on_delete=models.CASECADE, null=True)
-	from_user = model.ForeignKey(User, related_name='notification_from', on_delete=models.CASECADE, null=True)
-	post = models.ForeignKey('Post', on_delete=models.CASECADE, related_name='+', blank=True)
-	comment = models.ForeignKey('Comment', on_delete=models.CASECADE, related_name='+', blank=True)
-	date = models.DateTimeField(default=timezone.now)
-	user_has_seen = models.BooleanField(default=False)
+	#notification_type = models.IntegerField()
+	#to_user = model.ForeignKey(User, related_name='notification_to', on_delete=models.CASECADE, null=True)
+	#from_user = model.ForeignKey(User, related_name='notification_from', on_delete=models.CASECADE, null=True)
+	#post = models.ForeignKey('Post', on_delete=models.CASECADE, related_name='+', blank=True)
+	#comment = models.ForeignKey('Comment', on_delete=models.CASECADE, related_name='+', blank=True)
+	#date = models.DateTimeField(default=timezone.now)
+	#user_has_seen = models.BooleanField(default=False)
