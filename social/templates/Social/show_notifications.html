@@ -8,29 +8,33 @@
     }
   }
 </script>
+  
 <div class="dropdown">
-  <span class="badge bg-primary notification-badge" onclick="showNotifications()"><i class="fas fa-bell"></i></span>
-  <div class="dropdown-content d-done id="notification-container">
-      {% for notification in notifications %}
-          {% if notification.post %}
-              {% if notification.notification_type == 1 %}
-              <div class="dropdown-item-parent">
-                  <a href="#">@{{ notification.from_user }} liked your post</a>
-                  <span class="dropdown-item-close">&times;</span>
-              </div>
-              {% elif notification.notification_type == 2 %}                                     
-              <div class="dropdown-item-parent">
-                  <a href="#">@{{ notification.from_user }} liked your post</a>
-                  <span class="dropdown-item-close">&times;</span>
-              </div>
-              {% endif %}
-       {% else %}
+	<span class="badge bg-primary notification-badge" onclick="showNotifications()">{{ notifications.count }}</span>
+	<div class="dropdown-content d-none" id="notification-container">
+		{% for notification in notifications %}
+			{% if notification.post %}
+				{% if notification.notification_type == 1 %}
+				<div class="dropdown-item-parent">
+					<a href="#">@{{ notification.from_user }} liked your post</a>
+					<span class="dropdown-item-close>&times;</span>
+				</div>
+				{% elif notification.notification_type == 2 %}
+				<div class="dropdown-item-parent">
+					<a href="#">@{{ notification.from_user }} commented on your post</a>
+					<span class="dropdown-item-close>&times;</span>
+				</div>
+				{% endif %}
+		  {% else %}
        <div class="dropdown-item-parent">
                   <a href="#">@{{ notification.from_user }} is Started Following You !</a>
                   <span class="dropdown-item-close">&times;</span>
               </div>
        {% endif %}
        {% endfor %}
+		
+		
+     
        <style>
 									.notification-badge{
 										transition: 0.5s;
