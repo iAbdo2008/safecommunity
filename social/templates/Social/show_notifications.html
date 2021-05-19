@@ -1,1 +1,33 @@
 
+
+
+
+
+
+
+
+<div class="dropdown">
+    <span class="badge bg-primary notification-badge"><i class="fad fa-bell"></i>{{ notification.count }}</span>
+    <div class"dropdown-content d-none" id="notification-container">
+        {% for notification in notifications %}
+            {% if notification.post %}
+                {% if notification.notification_type == 1 %}
+                <div class="dropdown-item-parent">
+                    <a href="#">@{{ notification.from_user }} Reacted to Your Post</a>
+                    <span class="dropdown-item-close">&times;</span>
+                </div>
+                {% elif notification.notification_type == 2 %}
+                <div class="dropdown-item-parent">
+                    <a href="#">@{{ notification.from_user }} Commented on Your Post</a>
+                    <span class="dropdown-item-close">&times;</span>
+                </div>
+                {% endif %}
+            {% else %}
+            <div class="dropdown-item-parent">
+                    <a href="#">@{{ notification.from_user }} Has Started Following ! Awsome</a>
+                    <span class="dropdown-item-close">&times;</span>
+            </div>
+            {% endif %}
+            {% endfor %}
+    </div>
+</div>
