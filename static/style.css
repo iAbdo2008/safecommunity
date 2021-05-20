@@ -1,10 +1,10 @@
 .notification-badge{
-    transition: 0.5s;
+    transition: 0.3s;
 }
 .notification-badge:hover {
     cursor: pointer;
     opacity: 0.75;
-    transition: 0.3;
+    transition: 0.3s;
 
 }
 .dropdown{
@@ -38,7 +38,7 @@
     right: 0;
     font-size: 1.8rem;
     padding-rigth: 5px;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 .dropdown-item-close:hover {
     color: rgba(180, 25, 25);
