@@ -15,20 +15,32 @@
             {% if notification.post %}
                 {% if notification.notification_type == 1 %}
                 <div class="dropdown-item-parent">
-                    <a href="#">@{{ notification.from_user }} Reacted to Your Post</a>
-                    <span class="dropdown-item-close">&times;</span>
+                    <div class="card">
+                        <div class="card-body">
+                            <a href="#">@{{ notification.from_user }} Reacted to Your Post</a>
+                            <span class="dropdown-item-close">&times;</span>
+                        </div>
+                    </div>
                 </div>
                 {% elif notification.notification_type == 2 %}
                 <div class="dropdown-item-parent">
-                    <a href="#">@{{ notification.from_user }} Commented on Your Post</a>
-                    <span class="dropdown-item-close">&times;</span>
-                </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <a href="#">@{{ notification.from_user }} Commented on Your Post</a>
+                            <span class="dropdown-item-close">&times;</span>
+                        </div>
+                    </div>
+                </div>>
                 {% endif %}
             {% else %}
             <div class="dropdown-item-parent">
-                    <a href="#">@{{ notification.from_user }} Has Started Following ! Awsome</a>
-                    <span class="dropdown-item-close">&times;</span>
-            </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <a href="#">@{{ notification.from_user }} Started Following You</a>
+                            <span class="dropdown-item-close">&times;</span>
+                        </div>
+                    </div>
+                </div>
             {% endif %}
             {% endfor %}
     </div>
