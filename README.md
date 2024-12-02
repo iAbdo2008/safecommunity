@@ -1,0 +1,1 @@
+Hi, I'm oPinqzz, This Is One of My Old Projects Done With Tutorials From Youtube and Changed My Vision to Programming, This Project Was Done When im 13 Years Old, Don't Give Me opinions, as its Discontinued
